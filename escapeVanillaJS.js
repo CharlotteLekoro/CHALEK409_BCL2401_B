@@ -9,20 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("solveRoom2").addEventListener("click", () => {
-        const jsConcepts = new Set(['closure', 'scope', 'hoisting', 'callbacks', 'promise', 'async & wait', 'IIFE(Immediately Invoke Function Expression']);
+        const jsConcepts = new Set(['closure', 'scope', 'hoisting', 'callbacks', 'async']);
         const reactConcepts = new Set(['components', 'jsx', 'hooks', 'async', ]);
-        const commonConcepts = findIntersection(jsConcepts);
+        const commonConcepts = findIntersection(jsConcepts, jsConcepts);
         document.getElementById("room2Result").textContent = `The code to unlock the door is: ${Array.from(commonConcepts).join(', ')}`;
     });
 
-    // 🪲 Bug: Asynchronous function ?
+    // 🪲 Bug: Asynchronous function ? YES
     document.getElementById("solveRoom3").addEventListener("click", () => {
         fetch('directions.json') 
             .then(response => response.json())
             .then(directions => {
                 navigateLabyrinth(directions)
                     .then(message => {
-                        // 🪲 Bug: Incorrect method
                         document.getElementById("room3Result").innerHTML = "message";
                     });
             });
